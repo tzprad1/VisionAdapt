@@ -33,6 +33,11 @@ jobs:
       - name: Abrir projeto VisionAdapt
         run: unzip -o VisionAdapt_SourceForCI.zip
 
+      - name: Ativar AndroidX
+        run: |
+          echo "android.useAndroidX=true" >> gradle.properties
+          echo "android.enableJetifier=true" >> gradle.properties
+
       - name: Compilar APK
         run: gradle :app:assembleDebug --stacktrace --no-daemon
 
@@ -41,3 +46,4 @@ jobs:
         with:
           name: VisionAdapt-APK
           path: app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error 
